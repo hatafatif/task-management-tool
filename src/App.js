@@ -1,9 +1,15 @@
 import './App.css';
+import Sidebar from './components/Sidebar'; 
+import NoteSection from './components/NoteSection';
 
 function App() {
   return (
     <div className="App">
-      App Working
+    <div className='window'>
+
+    <Sidebar />
+    <NoteSection />
+    </div>
     </div>
   );
 }

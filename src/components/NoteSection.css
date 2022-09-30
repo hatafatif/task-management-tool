@@ -1,0 +1,6 @@
+.NoteSection {
+    display: flex;
+    min-width: 75%;
+    min-height: 100%;
+    background-color: rgb(233, 137, 27);
+}
