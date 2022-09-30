@@ -2,14 +2,15 @@
   display: flex;
   /* justify-content: center;
   align-items: center; */
+  color: #cec8c1;
   min-height: 100vh;
 }
 
-.window {
+/* .window {
   display: flex;
   margin: 30px;
   background-color: blue;
   min-height: 100%;
   border: 2px solid black;
   width: 100%;
-}
+} */
