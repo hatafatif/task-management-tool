@@ -27,7 +27,7 @@
 }
 
 .Categories {
-    flex-basis: 70%;
+    flex-basis: 80%;
     justify-content: flex-start;
     display: flex;
     overflow-y: auto;
@@ -88,4 +88,20 @@
 .cat-desc {
     font-size: small;
     margin-left: 10px;
+}
+
+.SearchCat > input {
+    text-align: center;
+    min-width: 100%;
+    min-height: 30%;
+    background-color: transparent;
+    border: 0;
+    color: var(--text-color);
+}
+
+.SearchCat > input:focus {
+    background-color: transparent;
+    outline: 0;
+    border-bottom: 1px solid grey ;
+    color: var(--text-color);
 }

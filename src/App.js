@@ -106,6 +106,8 @@ const defaultNotes = [
     },
 ];
 
+
+
 const App = () => {
     const selectorFunction = (e) => {
         const cat_id = e.currentTarget.id;
@@ -123,6 +125,7 @@ const App = () => {
 
     return (
         <div className="App">
+        {/* <SuperDiv /> */}
             <Sidebar notes={notes} selectedCategory={selectedCategory} onClick={selectorFunction} />
             <NoteSection category={selectedCategory} />
         </div>

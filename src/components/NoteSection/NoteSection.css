@@ -31,7 +31,7 @@
     border-radius: 10px;
     box-shadow: 1px 1px 5px black;
     width: 95%;
-    height: 10%;
+    min-height: 10%;
 }
 .Note:hover {
     

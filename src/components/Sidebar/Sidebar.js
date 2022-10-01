@@ -10,7 +10,7 @@ const Sidebar = ({ notes, onClick, selectedCategory }) => {
     return (
         <div className="Sidebar">
             <Name />
-            <SearchCat />
+            {/* <SearchCat /> */}
             <Categories notes={notes} onClick={onClick} selectedCategory={selectedCategory} />
             <AddCat />
         </div>
