@@ -1,9 +1,9 @@
 import React from "react";
 
-const AddNote = () => {
+const AddNote = ({onClick}) => {
     return (
         <div className="AddNote">
-            <button>Add Note +</button>
+            <button onClick={onClick}>Add Note +</button>
         </div>
     );
 };

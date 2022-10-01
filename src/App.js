@@ -2,6 +2,7 @@ import { useState, React } from "react";
 import "./App.css";
 import Sidebar from "./components/Sidebar/Sidebar";
 import NoteSection from "./components/NoteSection/NoteSection";
+import NewNoteForm from "./components/Forms/NewNoteForm";
 
 const defaultNotes = [
     {
@@ -106,10 +107,13 @@ const defaultNotes = [
     },
 ];
 
-
-
 const App = () => {
-    const selectorFunction = (e) => {
+    // Main state to keep all the data
+    const [notes, setNotes] = useState(defaultNotes);
+
+    // Functionality to select a category from sidebar.
+    const [selectedCategory, setSelectedCategory] = useState(notes[0]);
+    const selectCategory = (e) => {
         const cat_id = e.currentTarget.id;
         const clickedCat = notes.filter((cat) => cat.cat_id == cat_id);
         // debug
@@ -117,17 +121,33 @@ const App = () => {
         setSelectedCategory(clickedCat[0]);
     };
 
-    const [notes, setNotes] = useState(defaultNotes);
-    const [selectedCategory, setSelectedCategory] = useState(notes[0]);
+    //Functionality to toggle NewNoteForm.
+    const [newNotePressed, setNewNotePressed] = useState(false);
+    const handleNewNoteSubmit = () => {
+        setNewNotePressed(!newNotePressed);
+    };
+
     // debug
     // console.log("Start of App component");
     // console.log(notes);
 
     return (
         <div className="App">
-        {/* <SuperDiv /> */}
-            <Sidebar notes={notes} selectedCategory={selectedCategory} onClick={selectorFunction} />
-            <NoteSection category={selectedCategory} />
+            {newNotePressed ? (
+                <NewNoteForm newNoteSubmitOnClick={handleNewNoteSubmit} />
+            ) : (
+                <></>
+            )}
+            {/* <NewCatForm /> */}
+            <Sidebar
+                notes={notes}
+                selectedCategory={selectedCategory}
+                onClick={selectCategory}
+            />
+            <NoteSection
+                category={selectedCategory}
+                newNoteOnClick={() => setNewNotePressed(!newNotePressed)}
+            />
         </div>
     );
 };

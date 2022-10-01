@@ -1,0 +1,38 @@
+.NewNoteForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+.note-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 20px;
+    min-width: 30vw;
+    min-height: 40vh;
+}
+
+.note-form > input {
+    box-sizing: border-box;
+    margin: 20px;
+    background-color: transparent;
+    border: 0;
+    color: var(--text-color);
+    min-width: 80%;
+}
+
+.note-form > input:focus, 
+.note-form > input:hover {
+    outline: 0;
+    scale: 1.1;
+    transition: 0.3s;
+    border-bottom: 1px solid grey ;
+}
