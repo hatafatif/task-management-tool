@@ -2,7 +2,9 @@ import React from 'react'
 
 const Name = () => {
   return (
-    <div className='Name'>Name</div>
+    <div className='Name'>
+      <div className='user-name'>Hataf</div>
+    </div>
   )
 }
 

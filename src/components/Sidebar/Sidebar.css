@@ -1,25 +1,70 @@
 .Sidebar {
     display: flex;
     flex-direction: column;
-    background-color: #1e1f21
+    background-color: #1e1f21;
 }
 
 .Sidebar > * {
+    justify-content: center;
+    align-items: center;
     border: 1px solid grey;
-}
-
-.Categories {
-    flex-grow: 7;
-}
-
-.Name {
-    flex-grow: 1;
+    display: flex;
 }
 
 .SearchCat {
-    flex-grow: 1;
+    flex-basis: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.SearchCat > input {
+    width: 50%;
+    height: 20%;
+}
+
+.SearchCat > label > span {
+    margin-right: 20px;
+}
+
+.Categories {
+    flex-basis: 70%;
+    justify-content: flex-start;
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column;
+}
+
+.Name {
+    flex-basis: 10%;
+}
+
+.user-name {
+    font-size: x-large;
 }
 
 .AddCat {
-    flex-grow: 1;
+    flex-basis: 10%;
+}
+
+.Category {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 10%;
+    justify-content: center;
+    /* max-height: 100px;
+    overflow-y: auto; */
+    width: 100%;
+    margin: 12px 0;
+    outline: 1px solid grey;
+}
+
+.cat-name {
+    font-size: larger;
+    margin-left: 10px;
+}
+
+.cat-desc {
+    font-size: small;
+    margin-left: 10px;
 }

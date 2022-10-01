@@ -2,7 +2,9 @@ import React from 'react'
 
 const AddCat = () => {
   return (
-    <div className='AddCat'>AddCat</div>
+    <div className='AddCat'>
+      <button>Add a New Category +</button>
+    </div>
   )
 }
 

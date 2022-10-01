@@ -1,15 +1,15 @@
 .App {
   display: flex;
   color: #cec8c1;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .Sidebar {
-  flex-grow: 1;
+  flex-basis: 20%;
 }
 
 .NoteSection {
-  flex-grow: 4.3;
+  flex-basis: 80%;
 }
 
 

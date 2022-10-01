@@ -4,19 +4,44 @@
     flex-direction: column;
 }
 
-.NoteSection * {
+.NoteSection > * {
     border: 1px solid grey ;
 }
 
+.Header {
+    flex-basis: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .Notes {
-    flex-grow: 10;
+    flex-basis: 85%;
+    overflow-y: scroll;
+}
+
+.Note {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0px;
+    margin-left: 10px;
+    border: 1px solid grey;
+}
+
+.note-title {
+    display: flex;
+    align-items: flex-end;
+    margin: 20px 0px;
+}
+
+.note-title > div {
+    font-size: larger;
+    margin-left: 5px;
 }
 .AddNote {
-    flex-grow: 1
-}
-.Header {
-    flex-grow: 1
-
+    flex-basis: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
