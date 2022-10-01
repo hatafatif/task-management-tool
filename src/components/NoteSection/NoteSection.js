@@ -13,6 +13,6 @@ const NoteSection = () => {
       <AddNote />
     </div>
   )
-}
+}   
 
 export default NoteSection

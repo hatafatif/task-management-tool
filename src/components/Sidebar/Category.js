@@ -1,10 +1,10 @@
 import React from "react";
 
-const Category = ({ name }) => {
+const Category = ({ cat_id, category, desc }) => {
     return (
         <div className="Category">
-            <div className="cat-name">1. {name}</div>
-            <div className="cat-desc">This is me writing a generic description.</div>
+            <div className="cat-name">{cat_id}: {category}</div>
+            <div className="cat-desc">{desc}</div>
         </div>
     );
 };
