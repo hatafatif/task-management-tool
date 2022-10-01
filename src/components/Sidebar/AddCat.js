@@ -1,5 +1,4 @@
 import React from 'react'
-import "./AddCat.css"
 
 const AddCat = () => {
   return (

@@ -1,5 +1,4 @@
 import React from 'react'
-import "./SearchCat.css"
 
 const SearchCat = () => {
   return (

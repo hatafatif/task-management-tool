@@ -1,12 +1,25 @@
 .Sidebar {
     display: flex;
     flex-direction: column;
-    min-width: 25%;
-    min-height: 100%;
     background-color: #1e1f21
 }
 
 .Sidebar > * {
-    border-right: 1px solid grey;
-    border-bottom: 1px solid grey;
+    border: 1px solid grey;
+}
+
+.Categories {
+    flex-grow: 7;
+}
+
+.Name {
+    flex-grow: 1;
+}
+
+.SearchCat {
+    flex-grow: 1;
+}
+
+.AddCat {
+    flex-grow: 1;
 }
