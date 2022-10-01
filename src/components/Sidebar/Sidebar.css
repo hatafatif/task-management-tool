@@ -1,13 +1,12 @@
 .Sidebar {
     display: flex;
     flex-direction: column;
-    background-color: #1e1f21;
+    border-right: 1px solid grey;
 }
 
 .Sidebar > * {
     justify-content: center;
     align-items: center;
-    border: 1px solid grey;
     display: flex;
 }
 
@@ -37,6 +36,11 @@
 
 .Name {
     flex-basis: 10%;
+    font-family: "Raleway", sans-serif;
+    font-weight: 400;
+    font-size: medium;
+    text-transform: uppercase;
+    letter-spacing: 6px;
 }
 
 .user-name {
@@ -56,7 +60,24 @@
     overflow-y: auto; */
     width: 100%;
     margin: 12px 0;
-    outline: 1px solid grey;
+}
+
+.Category.selected {
+    border-left: 4px solid white;
+    color: white;
+}
+
+.Category.selected:hover {
+    cursor: default;
+    scale: 1;
+    color: white;
+}
+
+.Category:hover {
+    transition: 0.3s;
+    scale: 0.98;
+    color: #6798ff;
+    cursor: pointer;
 }
 
 .cat-name {

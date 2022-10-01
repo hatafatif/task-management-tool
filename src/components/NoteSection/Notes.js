@@ -1,17 +1,16 @@
-import React from 'react'
-import Note from "./Note"
+import React from "react";
+import Note from "./Note";
 
-const note = {title: "This is a note", text: "dude bro man this is something we really need to do", id: 1}
+const Notes = ({ notes }) => {
+  //debug
+    // console.log(notes);
+    return (
+        <div className="Notes">
+            {notes.map((note) => (
+                <Note key={note.id} note={note} />
+            ))}
+        </div>
+    );
+};
 
-const Notes = () => {
-  return (
-    <div className='Notes'>
-      <Note note={note}/>
-      <Note note={note}/>
-      <Note note={note}/>
-      <Note note={note}/>
-    </div>
-  )
-}
-
-export default Notes
+export default Notes;

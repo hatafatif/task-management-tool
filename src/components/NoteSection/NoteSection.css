@@ -1,47 +1,107 @@
 .NoteSection {
     display: flex;
-    background-color: #191a1c;
     flex-direction: column;
 }
 
-.NoteSection > * {
-    border: 1px solid grey ;
-}
-
 .Header {
+    background-color: var(--primary-color);
     flex-basis: 10%;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-bottom: 1px solid grey;
 }
 .Notes {
-    flex-basis: 85%;
-    overflow-y: scroll;
-}
-
-.Note {
     display: flex;
     flex-direction: column;
-    margin: 20px 0px;
-    margin-left: 10px;
-    border: 1px solid grey;
+    align-items: center;
+    flex-basis: 85%;
+    min-width: 100%;
+    overflow-y: scroll;
+    /* margin: auto */
+}   
+
+.Note {
+    /* background-color: #28293d; */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px 0px 0px 10px;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px black;
+    width: 95%;
+    height: 10%;
+}
+.Note:hover {
+    
+    transition: 0.3s;
+    scale: 1.02;
+}
+
+.Note.green {
+    background-color: var(--note-green);
+    color: var(--text-color);
+}
+.Note.green:hover {
+    background-color: var(--note-green-light);
+    color: var(--text-color);
+}
+
+.Note.purple {
+    background-color: var(--note-purple);
+    color: var(--text-color);
+}
+.Note.purple:hover {
+    background-color: var(--note-purple-light);
+    color: var(--text-color);
+}
+
+.Note.red {
+    background-color: var(--note-red);
+    color: var(--text-color);
+}
+.Note.red:hover {
+    background-color: var(--note-red-light);
+    color: var(--text-color);
+}
+
+.Note.yellow {
+    background-color: var(--note-yellow);
+    color: var(--text-color);
+}
+.Note.yellow:hover {
+    background-color: var(--note-yellow-light);
+    color: var(--text-color);
+}
+
+.Note.blue {
+    background-color: var(--note-blue);
+    color: var(--text-color);
+}
+.Note.blue:hover {
+    background-color: var(--note-blue-light);
+    color: var(--text-color);
 }
 
 .note-title {
     display: flex;
-    align-items: flex-end;
-    margin: 20px 0px;
-}
-
-.note-title > div {
-    font-size: larger;
+    align-items: flex-start;
+    font-size: 20px;
+    margin-bottom: 5px;
     margin-left: 5px;
 }
+.note-text {
+    /* display: flex;
+    align-items: flex-start; */
+    font-size: 14px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
 .AddNote {
     flex-basis: 5%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
-

@@ -1,11 +1,15 @@
 import React from "react";
 
+
 const Note = ({ note }) => {
+    //debug
+    // console.log(note)
+    const noteClass = `Note ${note.color}`
     return (
-        <div className="Note">
+        <div className={noteClass}>
             <div className="note-title">
                 {note.id}{". "}
-                <div>{note.title}</div>
+                {note.title}
             </div>
             <div className="note-text">{note.text}</div>
         </div>

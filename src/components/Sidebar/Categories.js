@@ -1,7 +1,7 @@
 import React from "react";
 import Category from "./Category";
 
-const Categories = ({ notes }) => {
+const Categories = ({ notes, onClick, selectedCategory}) => {
     return (
         <div className="Categories">
             <h2>Categories</h2>
@@ -11,6 +11,8 @@ const Categories = ({ notes }) => {
                     cat_id={obj.cat_id}
                     category={obj.category}
                     desc={obj.desc}
+                    onClick={onClick}
+                    selectedCategory={selectedCategory}
                 />
             ))}
         </div>

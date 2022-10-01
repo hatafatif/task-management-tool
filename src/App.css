@@ -1,15 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200;400;800&display=swap');
+
+:root {
+  --primary-color: #1b1b1d;
+  --secondary-color: #202124;
+  --text-color: white;
+  --note-red: #895B60;
+  --note-red-light: #9b656c;
+  --note-green: #366D34;
+  --note-green-light: #458a42;
+  --note-blue:#5D8D8B ;
+  --note-blue-light:#6ea5a2 ;
+  --note-yellow:#817b3e  ;
+  --note-yellow-light:#928b47;
+  --note-purple:#6A5173 ;
+  --note-purple-light:#856791 ;
+}
+*{
+
+  box-sizing: border-box;
+}
 .App {
   display: flex;
   color: #cec8c1;
   height: 100vh;
+  font-family: "Raleway", sans-serif;
+  font-weight: 400;
 }
 
+
+
 .Sidebar {
-  flex-basis: 20%;
+  flex-basis: 25%;
+  background-color: var(--primary-color);
 }
 
 .NoteSection {
-  flex-basis: 80%;
+  flex-basis: 75%;
+  background-color: var(--secondary-color);
 }
 
 
