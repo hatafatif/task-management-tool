@@ -8,20 +8,26 @@ import NewCatForm from "./components/Forms/NewCatForm";
 const defaultNotes = [
     {
         cat_id: 1,
-        category: "Work",
-        desc: "All the work related regre...err..goes here.",
+        category: "Office Work",
+        desc: "Pending tasks at my 9-5",
         notes: [],
     },
     {
         cat_id: 2,
-        category: "Hobby",
-        desc: "All the sleep related ...err..hobby related stuff goes here.",
+        category: "Freelance Work",
+        desc: "Pending freelance tasks",
         notes: [],
     },
     {
         cat_id: 3,
+        category: "Learning",
+        desc: "Different things I want to learn",
+        notes: [],
+    },
+    {
+        cat_id: 4,
         category: "Health",
-        desc: "All the health related ...err..nvm yeah, health related stuff goes here.",
+        desc: "All the health related stuff",
         notes: [],
     },
 ];
@@ -32,6 +38,7 @@ const App = () => {
     // Main state to keep all the data
     const [notes, setNotes] = useState(defaultNotes);
     const [categories, setCategories] = useState([]);
+
     // useEffect to get new categories and colors when notes state is set
     useEffect(() => {
         const tempCategories = [];
