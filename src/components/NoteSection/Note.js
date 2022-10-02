@@ -8,7 +8,6 @@ const Note = ({ note }) => {
     return (
         <div className={noteClass}>
             <div className="note-title">
-                {note.id}{". "}
                 {note.title}
             </div>
             <div className="note-text">{note.text}</div>

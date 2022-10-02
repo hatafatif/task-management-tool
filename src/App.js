@@ -9,23 +9,20 @@ const defaultNotes = [
         cat_id: 1,
         category: "Work",
         desc: "All the work related regre...err..goes here.",
-        notes: [
-        ],
+        notes: [],
     },
     {
         cat_id: 2,
         category: "Hobby",
         desc: "All the sleep related ...err..hobby related stuff goes here.",
-        notes: [
-        ],
+        notes: [],
     },
     {
         cat_id: 3,
         category: "Health",
         desc: "All the health related ...err..nvm yeah, health related stuff goes here.",
-        notes: [
-        ],
-    }
+        notes: [],
+    },
 ];
 
 const colors = ["Green", "Blue", "Yellow", "Red", "Purple"];
@@ -52,7 +49,7 @@ const App = () => {
 
     const selectCategory = (e) => {
         const current_cat_id = parseInt(e.currentTarget.id);
-        const clickedCat = notes.filter((cat) => cat.cat_id == current_cat_id);
+        const clickedCat = notes.filter((cat) => cat.cat_id === current_cat_id);
         // debug
         setSelectedCategory(clickedCat[0]);
     };
@@ -60,7 +57,7 @@ const App = () => {
     //Functionality to deal with NewNoteForm.
     const [newNotePressed, setNewNotePressed] = useState(false);
     const handleNewNoteSubmit = (receivedNote) => {
-        const notesCopy = notes.slice()
+        const notesCopy = notes.slice();
         console.log("New note received");
         console.log(receivedNote);
 
@@ -68,14 +65,14 @@ const App = () => {
             if (obj.category === receivedNote.category) {
                 obj.notes.push({
                     color: receivedNote.color,
-                    id: obj.notes.length+1,
+                    id: obj.notes.length + 1,
                     title: receivedNote.title,
-                    text: receivedNote.text
+                    text: receivedNote.text,
                 });
             }
         });
-    
-        setNotes(notesCopy)
+
+        setNotes(notesCopy);
         setNewNotePressed(!newNotePressed);
     };
     const handleNewNoteCancel = () => {
@@ -95,6 +92,7 @@ const App = () => {
                     categories={categories}
                     colors={colors}
                     notes={notes}
+                    selectedCategory={selectedCategory}
                 />
             ) : (
                 <></>

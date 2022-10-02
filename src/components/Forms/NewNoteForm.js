@@ -2,9 +2,9 @@ import React from "react";
 import "./forms.css";
 import { useState } from "react";
 
-const NewNoteForm = ({ onSubmit, onCancel, categories, colors }) => {
+const NewNoteForm = ({ onSubmit, onCancel, categories, colors, selectedCategory }) => {
     const [colorSelect, setColorSelect] = useState(colors[0]);
-    const [categorySelect, setCategorySelect] = useState(categories[0]);
+    const [categorySelect, setCategorySelect] = useState(selectedCategory.category);
     const [titleInput, setTitleInput] = useState("");
     const [textInput, setTextInput] = useState("");
     const [showWarning, setShowWarning] = useState(false);
