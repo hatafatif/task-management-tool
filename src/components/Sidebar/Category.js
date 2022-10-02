@@ -2,6 +2,7 @@ import React from "react";
 
 const Category = ({ cat_id, category, desc, onClick, selectedCategory }) => {
     let isSelected = ""
+    
     if (selectedCategory.category === category){
         isSelected = "selected" 
     }

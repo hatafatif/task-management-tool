@@ -6,7 +6,7 @@ import AddCat from "./AddCat";
 import Categories from "./Categories";
 
 const Sidebar = ({ notes, onClick, selectedCategory }) => {
-
+    
     return (
         <div className="Sidebar">
             <Name />

@@ -1,4 +1,4 @@
-import { useState, React } from "react";
+import { useState, React, useEffect } from "react";
 import "./App.css";
 import Sidebar from "./components/Sidebar/Sidebar";
 import NoteSection from "./components/NoteSection/NoteSection";
@@ -107,17 +107,32 @@ const defaultNotes = [
     },
 ];
 
+const colors = ["Green", "Blue", "Yellow", "Red", "Purple"];
+
 const App = () => {
     // Main state to keep all the data
     const [notes, setNotes] = useState(defaultNotes);
+    const [categories, setCategories] = useState([]);
+
+    // useEffect to get new categories and colors when notes state is set
+    useEffect(() => {
+        const tempCategories = [];
+
+        defaultNotes.forEach((obj) => {
+            if (tempCategories.indexOf(obj.category) === -1)
+                tempCategories.push(obj.category);
+        });
+
+        setCategories(tempCategories);
+    }, [notes]);
 
     // Functionality to select a category from sidebar.
     const [selectedCategory, setSelectedCategory] = useState(notes[0]);
+    
     const selectCategory = (e) => {
-        const cat_id = e.currentTarget.id;
-        const clickedCat = notes.filter((cat) => cat.cat_id == cat_id);
+        const current_cat_id = parseInt(e.currentTarget.id);
+        const clickedCat = notes.filter((cat) => cat.cat_id == current_cat_id);
         // debug
-        // console.log(clickedCat[0])
         setSelectedCategory(clickedCat[0]);
     };
 
@@ -126,15 +141,23 @@ const App = () => {
     const handleNewNoteSubmit = () => {
         setNewNotePressed(!newNotePressed);
     };
+    const handleNewNoteCancel = () => {
+        setNewNotePressed(!newNotePressed);
+    };
 
     // debug
     // console.log("Start of App component");
     // console.log(notes);
-
+    
     return (
         <div className="App">
             {newNotePressed ? (
-                <NewNoteForm newNoteSubmitOnClick={handleNewNoteSubmit} />
+                <NewNoteForm
+                    onSubmit={handleNewNoteSubmit}
+                    onCancel={handleNewNoteCancel}
+                    categories={categories}
+                    colors={colors}
+                />
             ) : (
                 <></>
             )}
