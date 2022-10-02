@@ -1,9 +1,35 @@
 import React from "react";
 import "./forms.css";
+import { useState } from "react";
 
 const NewNoteForm = ({ onSubmit, onCancel, categories, colors }) => {
+    const [colorSelect, setColorSelect] = useState(colors[0]);
+    const [categorySelect, setCategorySelect] = useState(categories[0]);
+    const [titleInput, setTitleInput] = useState("");
+    const [textInput, setTextInput] = useState("");
+    const [showWarning, setShowWarning] = useState(false);
+    const newNote = {title: "", text: "", color: "", category: ""};
 
-    
+    const handleSubmit = () => {
+        if (titleInput === "" || textInput === ""){
+            console.log("Title or text empty")
+            setShowWarning(true)
+            return
+        }
+        setShowWarning(false)
+        
+        newNote.title = titleInput
+        newNote.text = textInput
+        newNote.category = categorySelect
+        newNote.color = colorSelect.toLowerCase()
+
+        //debug
+        // console.log("Sending the new note object")
+        // console.log(newNote)
+
+        onSubmit(newNote)
+
+    }
 
     return (
         <div className="NewNoteForm">
@@ -12,19 +38,28 @@ const NewNoteForm = ({ onSubmit, onCancel, categories, colors }) => {
                     x
                 </div>
                 <h3>Add New Note</h3>
-                <input placeholder="Title: " />
-                <input placeholder="Text: " />
+                <input
+                    placeholder="Title: "
+                    onChange={(e) => setTitleInput(e.target.value)}
+                    value={titleInput}
+                    required
+                />
+                <input
+                    placeholder="Text: "
+                    onChange={(e) => setTextInput(e.target.value)}
+                    value={textInput}
+                    required
+                />
                 <div className="dropdowns">
                     <div className="dropdown category-dropdown">
-                        <label >Category: </label>
-                        <select name="cateogory-dropdown">
+                        <label>Category: </label>
+                        <select
+                            onChange={(e) => setCategorySelect(e.target.value)}
+                            value={categorySelect}
+                        >
                             {categories.map((category) => {
-                                console.log(category);
                                 return (
-                                    <option
-                                        key={category}
-                                        value={category}
-                                    >
+                                    <option key={category} value={category}>
                                         {category}
                                     </option>
                                 );
@@ -33,14 +68,20 @@ const NewNoteForm = ({ onSubmit, onCancel, categories, colors }) => {
                     </div>
                     <div className="dropdown color-dropdown">
                         <label>Color: </label>
-                        <select>
-                            {colors.map((color)=>
-                             <option key={color} value={color.toLowerCase()}>{color}</option>   
-                            )}
+                        <select
+                            onChange={(e) => setColorSelect(e.target.value)}
+                            value={colorSelect}
+                        >
+                            {colors.map((color) => (
+                                <option key={color} value={color}>
+                                    {color}
+                                </option>
+                            ))}
                         </select>
                     </div>
                 </div>
-                <button onClick={onSubmit}>Submit</button>
+                <button onClick={handleSubmit}>Submit</button>
+                {showWarning ? <div className="warning">  Please fill in all the fields.  </div> : <></>}
             </div>
         </div>
     );

@@ -10,24 +10,6 @@ const defaultNotes = [
         category: "Work",
         desc: "All the work related regre...err..goes here.",
         notes: [
-            {
-                id: 1,
-                title: "Regret",
-                text: "It is necessary to suffer. It is a part of life.",
-                color: "yellow",
-            },
-            {
-                id: 2,
-                title: "More Regret",
-                text: "It is necessary to suffer more. It is a part of life.",
-                color: "green",
-            },
-            {
-                id: 3,
-                title: "Intense Regret",
-                text: "It is necessary to intensely suffer. It is a part of life.",
-                color: "red",
-            },
         ],
     },
     {
@@ -35,36 +17,6 @@ const defaultNotes = [
         category: "Hobby",
         desc: "All the sleep related ...err..hobby related stuff goes here.",
         notes: [
-            {
-                id: 1,
-                title: "Sleep",
-                text: "It is necessary to sleep. It is a part of life.",
-                color: "green",
-            },
-            {
-                id: 2,
-                title: "More Sleep",
-                text: "It is necessary to sleep more. It is a part of life.",
-                color: "yellow",
-            },
-            {
-                id: 3,
-                title: "Intense Sleep",
-                text: "It is necessary to intensely sleep. It is a part of life.",
-                color: "blue",
-            },
-            {
-                id: 4,
-                title: "Intense Sleep",
-                text: "It is necessary to intensely sleep. It is a part of life.",
-                color: "red",
-            },
-            {
-                id: 5,
-                title: "Super Sleep",
-                text: "It is necessary to super sleep. It is a part of life.",
-                color: "purple",
-            },
         ],
     },
     {
@@ -72,39 +24,8 @@ const defaultNotes = [
         category: "Health",
         desc: "All the health related ...err..nvm yeah, health related stuff goes here.",
         notes: [
-            {
-                color: "yellow",
-                id: 1,
-                title: "Sleep",
-                text: "It is necessary to kinda sorta take care of your health. It is a part of life.",
-            },
-            {
-                color: "yellow",
-                id: 2,
-                title: "More Sleep",
-                text: "It is necessary to sleep more. It is a part of life.",
-            },
-            {
-                color: "yellow",
-                id: 3,
-                title: "Intense Sleep",
-                text: "It is necessary to intensely sleep. It is a part of life.",
-            },
         ],
-    },
-    {
-        cat_id: 4,
-        category: "Gymnastics",
-        desc: "All the health related ...err..nvm yeah, health related stuff goes here.",
-        notes: [
-            {
-                color: "yellow",
-                id: 1,
-                title: "Sleep",
-                text: "It is necessary to kinda sorta take care of your health. It is a part of life.",
-            },
-        ],
-    },
+    }
 ];
 
 const colors = ["Green", "Blue", "Yellow", "Red", "Purple"];
@@ -128,7 +49,7 @@ const App = () => {
 
     // Functionality to select a category from sidebar.
     const [selectedCategory, setSelectedCategory] = useState(notes[0]);
-    
+
     const selectCategory = (e) => {
         const current_cat_id = parseInt(e.currentTarget.id);
         const clickedCat = notes.filter((cat) => cat.cat_id == current_cat_id);
@@ -136,9 +57,25 @@ const App = () => {
         setSelectedCategory(clickedCat[0]);
     };
 
-    //Functionality to toggle NewNoteForm.
+    //Functionality to deal with NewNoteForm.
     const [newNotePressed, setNewNotePressed] = useState(false);
-    const handleNewNoteSubmit = () => {
+    const handleNewNoteSubmit = (receivedNote) => {
+        const notesCopy = notes.slice()
+        console.log("New note received");
+        console.log(receivedNote);
+
+        notesCopy.forEach((obj) => {
+            if (obj.category === receivedNote.category) {
+                obj.notes.push({
+                    color: receivedNote.color,
+                    id: obj.notes.length+1,
+                    title: receivedNote.title,
+                    text: receivedNote.text
+                });
+            }
+        });
+    
+        setNotes(notesCopy)
         setNewNotePressed(!newNotePressed);
     };
     const handleNewNoteCancel = () => {
@@ -148,7 +85,7 @@ const App = () => {
     // debug
     // console.log("Start of App component");
     // console.log(notes);
-    
+
     return (
         <div className="App">
             {newNotePressed ? (
@@ -157,6 +94,7 @@ const App = () => {
                     onCancel={handleNewNoteCancel}
                     categories={categories}
                     colors={colors}
+                    notes={notes}
                 />
             ) : (
                 <></>
