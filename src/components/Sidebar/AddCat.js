@@ -1,9 +1,9 @@
 import React from 'react'
 
-const AddCat = () => {
+const AddCat = ({onClick}) => {
   return (
     <div className='AddCat'>
-      <button>Add a New Category +</button>
+      <button onClick={onClick}>Add a New Category +</button>
     </div>
   )
 }

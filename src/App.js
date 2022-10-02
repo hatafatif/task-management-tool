@@ -3,6 +3,7 @@ import "./App.css";
 import Sidebar from "./components/Sidebar/Sidebar";
 import NoteSection from "./components/NoteSection/NoteSection";
 import NewNoteForm from "./components/Forms/NewNoteForm";
+import NewCatForm from "./components/Forms/NewCatForm";
 
 const defaultNotes = [
     {
@@ -31,17 +32,17 @@ const App = () => {
     // Main state to keep all the data
     const [notes, setNotes] = useState(defaultNotes);
     const [categories, setCategories] = useState([]);
-
     // useEffect to get new categories and colors when notes state is set
     useEffect(() => {
         const tempCategories = [];
 
-        defaultNotes.forEach((obj) => {
+        notes.forEach((obj) => {
             if (tempCategories.indexOf(obj.category) === -1)
                 tempCategories.push(obj.category);
         });
 
         setCategories(tempCategories);
+        console.log(notes)
     }, [notes]);
 
     // Functionality to select a category from sidebar.
@@ -53,6 +54,25 @@ const App = () => {
         // debug
         setSelectedCategory(clickedCat[0]);
     };
+
+    //Functionality to deal with NewCatForm.
+    const [newCatPressed, setNewCatPressed] = useState(false);
+    const handleNewCatSubmit = (receivedCat) => {
+        setNewCatPressed(false);
+        const notesCopy = notes.slice();
+        const newCat = {
+            cat_id: notesCopy.length+1,
+            category: receivedCat.title,
+            desc: receivedCat.desc,
+            notes: [],
+        };
+
+        notesCopy.push(newCat);
+        setNotes(notesCopy);
+        console.log("Received New Cat");
+        console.log(receivedCat);
+    };
+    const handleNewCatCancel = () => setNewCatPressed(false);
 
     //Functionality to deal with NewNoteForm.
     const [newNotePressed, setNewNotePressed] = useState(false);
@@ -85,7 +105,7 @@ const App = () => {
 
     return (
         <div className="App">
-            {newNotePressed ? (
+            {newNotePressed && (
                 <NewNoteForm
                     onSubmit={handleNewNoteSubmit}
                     onCancel={handleNewNoteCancel}
@@ -94,18 +114,22 @@ const App = () => {
                     notes={notes}
                     selectedCategory={selectedCategory}
                 />
-            ) : (
-                <></>
             )}
-            {/* <NewCatForm /> */}
+            {newCatPressed && (
+                <NewCatForm
+                    onSubmit={handleNewCatSubmit}
+                    onCancel={handleNewCatCancel}
+                />
+            )}
             <Sidebar
                 notes={notes}
                 selectedCategory={selectedCategory}
                 onClick={selectCategory}
+                newCatOnClick={() => setNewCatPressed(true)}
             />
             <NoteSection
                 category={selectedCategory}
-                newNoteOnClick={() => setNewNotePressed(!newNotePressed)}
+                newNoteOnClick={() => setNewNotePressed(true)}
             />
         </div>
     );

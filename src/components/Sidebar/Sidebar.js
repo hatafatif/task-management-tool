@@ -4,13 +4,13 @@ import Name from "./Name";
 import AddCat from "./AddCat";
 import Categories from "./Categories";
 
-const Sidebar = ({ notes, onClick, selectedCategory }) => {
+const Sidebar = ({ notes, onClick, selectedCategory, newCatOnClick }) => {
     
     return (
         <div className="Sidebar">
             <Name />
             <Categories notes={notes} onClick={onClick} selectedCategory={selectedCategory} />
-            <AddCat />
+            <AddCat onClick={newCatOnClick} />
         </div>
     );
 };

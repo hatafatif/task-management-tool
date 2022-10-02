@@ -1,4 +1,5 @@
-.NewNoteForm {
+.NewNoteForm,
+.NewCatForm {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -101,4 +102,12 @@
     transition: 0.1s;
     font-size: 27px;
     color: rgba(255, 255, 255, 0.7);
+}
+
+.warning {
+    color: rgba(255, 0, 0, 0.7);
+    font-size: 14px;
+    position: absolute;
+    top: 75%;
+    transition: 300ms;
 }

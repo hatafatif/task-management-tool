@@ -9,7 +9,7 @@ const Category = ({ cat_id, category, desc, onClick, selectedCategory }) => {
 
     return (
         <div id={cat_id} className={`Category ${isSelected}`} onClick={onClick}>
-            <div className="cat-name">{cat_id}: {category}</div>
+            <div className="cat-name">{category}</div>
             <div className="cat-desc">{desc}</div>
         </div>
     );
