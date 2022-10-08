@@ -7,27 +7,9 @@ import NewCatForm from "./components/Forms/NewCatForm";
 
 const defaultNotes = [
     {
-        cat_id: 1,
-        category: "Office Work",
-        desc: "Pending tasks at my 9-5",
-        notes: [],
-    },
-    {
-        cat_id: 2,
-        category: "Freelance Work",
-        desc: "Pending freelance tasks",
-        notes: [],
-    },
-    {
-        cat_id: 3,
-        category: "Learning",
-        desc: "Different things I want to learn",
-        notes: [],
-    },
-    {
-        cat_id: 4,
-        category: "Health",
-        desc: "All the health related stuff",
+        cat_id: 0,
+        category: "Uncategorized Notes",
+        desc: "All your notes go here by default",
         notes: [],
     },
 ];
@@ -35,29 +17,23 @@ const defaultNotes = [
 const colors = ["Green", "Blue", "Yellow", "Red", "Purple"];
 
 const App = () => {
+    // Variable to get existing notes from local storage.
+    let existingNotes = JSON.parse(localStorage.getItem("notes"));
+    if (existingNotes.length === 0) existingNotes = defaultNotes;
     // Main state to keep all the data
-    const [notes, setNotes] = useState(defaultNotes);
-    const [categories, setCategories] = useState([]);
+    const [notes, setNotes] = useState(existingNotes || defaultNotes);
+    const [categories, setCategories] = useState();
 
-    // Functionality to delete notes
-    const deleteNote = (noteToDelete) => {
-        const tempNotes = notes.slice();
-        tempNotes.forEach((category, i) => {
-            if (category.cat_id == noteToDelete.categoryID) {
-                category.notes.forEach((note, j) => {
-                    if (note.id == noteToDelete.noteID) {
-                        tempNotes[i].notes = tempNotes[i].notes.filter(
-                            (savedNote) => savedNote.id !== note.id
-                        );
-                    }
-                });
-            }
-        });
-        setNotes(tempNotes)
-    };
-
-    // useEffect to get new categories and colors when notes state is set, also save notes in local storage.
+    /*
+    useEffect when notes are changed. This function does 3 things:
+        1. Overwrites data in localStorage.
+        2. Updates categories state.
+        3. If the selected category is deleted, it updates the selected category.
+    */
     useEffect(() => {
+        if (notes.length === 0) {
+            setNotes(defaultNotes);
+        }
         const tempCategories = [];
 
         notes.forEach((obj) => {
@@ -66,6 +42,18 @@ const App = () => {
         });
 
         setCategories(tempCategories);
+        // Save notes (or overwrite) them when notes are updated.
+        localStorage.removeItem("notes");
+        localStorage.setItem("notes", JSON.stringify(notes));
+
+        let checkDeletedCat = true;
+        notes.forEach(cat => {
+            if (cat.cat_id === selectedCategory.cat_id){
+                checkDeletedCat = false;
+            }
+        })
+        checkDeletedCat && setSelectedCategory(notes[0])
+
         console.log(notes);
     }, [notes]);
 
@@ -73,11 +61,18 @@ const App = () => {
     const [selectedCategory, setSelectedCategory] = useState(notes[0]);
 
     const selectCategory = (e) => {
-        const current_cat_id = parseInt(e.currentTarget.id);
-        const clickedCat = notes.filter((cat) => cat.cat_id === current_cat_id);
+        const current_cat_id = e.currentTarget.id;
+        const clickedCat = notes.filter((cat) => cat.cat_id == current_cat_id);
         // debug
         setSelectedCategory(clickedCat[0]);
     };
+    useEffect(
+        () =>
+            console.log(
+                `Selected Category is now: ${selectedCategory.category}`
+            ),
+        [selectedCategory]
+    );
 
     //Functionality to deal with NewCatForm.
     const [newCatPressed, setNewCatPressed] = useState(false);
@@ -85,7 +80,7 @@ const App = () => {
         setNewCatPressed(false);
         const notesCopy = notes.slice();
         const newCat = {
-            cat_id: notesCopy.length + 1,
+            cat_id: receivedCat.title + Math.random().toString(),
             category: receivedCat.title,
             desc: receivedCat.desc,
             notes: [],
@@ -109,7 +104,7 @@ const App = () => {
             if (obj.category === receivedNote.category) {
                 obj.notes.push({
                     color: receivedNote.color,
-                    id: obj.notes.length + 1,
+                    id: receivedNote.title + Math.random().toString(),
                     title: receivedNote.title,
                     text: receivedNote.text,
                 });
@@ -121,6 +116,37 @@ const App = () => {
     };
     const handleNewNoteCancel = () => {
         setNewNotePressed(!newNotePressed);
+    };
+
+    // Functionality to delete notes
+    const deleteNote = (noteToDelete) => {
+        const tempNotes = notes.slice();
+        tempNotes.forEach((category, i) => {
+            if (category.cat_id == noteToDelete.categoryID) {
+                category.notes.forEach((note, j) => {
+                    if (note.id == noteToDelete.noteID) {
+                        tempNotes[i].notes = tempNotes[i].notes.filter(
+                            (savedNote) => savedNote.id !== note.id
+                        );
+                    }
+                });
+            }
+        });
+        setNotes(tempNotes);
+    };
+
+    // Functionality to delete categories
+    const deleteCat = (catToDeleteID) => {
+        if (notes.length == 1) {
+            console.log("We need at least one category");
+        } else {
+            console.log(`Delete category with id: ${catToDeleteID}`);
+            let tempNotes = notes.slice();
+            tempNotes = tempNotes.filter(
+                (category) => category.cat_id !== catToDeleteID
+            );
+            setNotes(tempNotes);
+        }
     };
 
     // debug
@@ -150,6 +176,7 @@ const App = () => {
                 selectedCategory={selectedCategory}
                 onClick={selectCategory}
                 newCatOnClick={() => setNewCatPressed(true)}
+                deleteCat={deleteCat}
             />
             <NoteSection
                 category={selectedCategory}

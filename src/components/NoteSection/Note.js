@@ -15,14 +15,16 @@ const Note = ({ note, onDelete, categoryID }) => {
             onMouseEnter={() => setShowButtons(true)}
             onMouseLeave={() => setShowButtons(false)}
         >
-            <div className="note-title">{note.title}</div>
-            <div className="note-text">{note.text}</div>
+            <div className="note-content">
+                <div className="note-title">{note.title}</div>
+                <div className="note-text">{note.text}</div>
+            </div>
             {showButtons && note.id !== "NULL" && (
                 <div
                     className="note-buttons"
                     onClick={() => onDelete(thisNote)}
                 >
-                    Delete
+                    <i className="fa-solid fa-xmark"></i>
                 </div>
             )}
         </div>
