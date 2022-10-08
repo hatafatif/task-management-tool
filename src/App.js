@@ -39,7 +39,24 @@ const App = () => {
     const [notes, setNotes] = useState(defaultNotes);
     const [categories, setCategories] = useState([]);
 
-    // useEffect to get new categories and colors when notes state is set
+    // Functionality to delete notes
+    const deleteNote = (noteToDelete) => {
+        const tempNotes = notes.slice();
+        tempNotes.forEach((category, i) => {
+            if (category.cat_id == noteToDelete.categoryID) {
+                category.notes.forEach((note, j) => {
+                    if (note.id == noteToDelete.noteID) {
+                        tempNotes[i].notes = tempNotes[i].notes.filter(
+                            (savedNote) => savedNote.id !== note.id
+                        );
+                    }
+                });
+            }
+        });
+        setNotes(tempNotes)
+    };
+
+    // useEffect to get new categories and colors when notes state is set, also save notes in local storage.
     useEffect(() => {
         const tempCategories = [];
 
@@ -49,7 +66,7 @@ const App = () => {
         });
 
         setCategories(tempCategories);
-        console.log(notes)
+        console.log(notes);
     }, [notes]);
 
     // Functionality to select a category from sidebar.
@@ -68,7 +85,7 @@ const App = () => {
         setNewCatPressed(false);
         const notesCopy = notes.slice();
         const newCat = {
-            cat_id: notesCopy.length+1,
+            cat_id: notesCopy.length + 1,
             category: receivedCat.title,
             desc: receivedCat.desc,
             notes: [],
@@ -137,6 +154,7 @@ const App = () => {
             <NoteSection
                 category={selectedCategory}
                 newNoteOnClick={() => setNewNotePressed(true)}
+                deleteNote={deleteNote}
             />
         </div>
     );
